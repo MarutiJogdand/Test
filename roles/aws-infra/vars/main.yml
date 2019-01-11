@@ -1,7 +1,7 @@
 ---
 # vars file for aws-infra
-aws_access_key: "AKIAJ2JH3M3UTLYX7HAQ"
-aws_secret_key: "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"
+aws_access_key: ""
+aws_secret_key: ""
 region: "us-east-1"
 
 # VPC
