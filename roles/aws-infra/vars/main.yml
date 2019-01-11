@@ -1,0 +1,24 @@
+---
+# vars file for aws-infra
+aws_access_key: "AKIAJ2JH3M3UTLYX7HAQ"
+aws_secret_key: "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"
+region: "us-east-1"
+
+# VPC
+vpc_cidr: 10.10.0.0/24
+vpc_name: "Ansible VPC"
+
+# Subnet
+subnet_name: "Ansible Subnet"
+subnet_cidr: 10.10.0.0/26
+
+# Internet Gateway Name
+igw_name: "Traffic IGW"
+route_name: "Traffic Route"
+securitygroup_name: "Ansible Security Group"
+
+ec2_tag: "WebServer"
+
+#The local path to which we would save our EC2 Private Key
+ec2_key_directory: "/root/Spring/AWS_Infra/roles/aws-infra"
+keypair_name: "omkar"
