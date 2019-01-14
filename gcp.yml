@@ -1,5 +1,8 @@
 - name: Compute Engine Instance Examples
   hosts: localhost
+  become: true
+  become_method: sudo
+  become_user: root
   vars:
     service_account_email: "ansible@cloudlearning-218407.iam.gserviceaccount.com"
     credentials_file: /root/cloud-learning.json
