@@ -1,0 +1,39 @@
+- name: Compute Engine Instance Examples
+  hosts: localhost
+  vars:
+    service_account_email: "ansible@cloudlearning-218407.iam.gserviceaccount.com"
+    credentials_file: /root/cloud-learning.json
+    project_id: "cloudlearning-218407"
+    instance_names: mj
+  tasks:
+    - name: create instances
+      gce:
+        instance_names: "{{instance_names}}"
+        zone: us-central1-a
+        machine_type: n1-standard-1
+        image: centos-7
+        state: present
+        service_account_email: "{{ service_account_email }}"
+        credentials_file: "{{ credentials_file }}"
+        project_id: "{{ project_id }}"
+        "metadata": { "kind": "compute#metadata", "items": [ { "key": "ssh-keys", "value": "marutijogdand794:ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAQEAi9erIYTdo86D+veLDZ4shgI36d6hshYzECeg+npt8BQDVU405HHz1CMYBAEK0xChCC/dY44gIyGJiVeyDBLSpuJbxbiHyrmYWanLrniWJr37xTGOV4SRrzY2yB/0u/ujnMPKW023v9jOgHQzHfbpNNm+jATurdqsKKyiBB8eY6S1wCv15QB7AUX9bnc34hKQBsOtPn252rq+Cu3XoKTegm1DZ/gwuBkn3w4ys6H9wCAlI7DPcDGT36bPNDvxYXhOtaxo9EBBtEMZuWD4SYLeozroB9KzmWsW6m2l25rDk+0UQLQ5F9xduz3MLBzW3aU/1XOFdeLKCtsnTPgRylWBpQ== marutijogdand794" } ] }
+      register: instanceInfo
+
+    - debug:
+         var: instanceInfo
+
+    - name: Save host data
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: gce_instances_ips
+      with_items: "{{ instanceInfo.instance_data }}"
+
+    - name: Wait for SSH for instances
+      wait_for:
+        delay: 1
+        host: "{{ item.public_ip }}"
+        port: 22
+        state: started
+        timeout: 30
+      with_items: "{{ instanceInfo.instance_data }}"
+
