@@ -1,20 +1,14 @@
 ---
-#Name:Role for creating Infrastructure (VPC, Subnet, IGW,Route tables,security group,EC2 Keypair,EC2 instance,ELB) on AWS.
-#
-# Current Author: Bunty Manchundiya.
-#
-# Created: 03-10-2018
-
 
 - name: Create EC2 server
   ec2:
-    image: ami-01e3b8c3a51e88954
+    image: ami-049ceee18ac22d417
     wait: yes
     instance_type: t2.micro
     region: "{{ region }}"
-    group_id: "sg-0b62197adedc81664"
+    group_id: "sg-09bad65848196207d"
     instance_tags:
-        Name: Ansible_instance
+        Name: Ansible_instance2
     count_tag:
       Name: apacheserver
     exact_count: 1

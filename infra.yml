@@ -1,5 +1,5 @@
 #playbook for creating infra for ec2 instance in this will create vpc ,subnet,igw, route table and ec2 instance by calling role aws-infra.
 
-- hosts: all
+- hosts: localhost
   roles:
   - aws-infra

@@ -4,14 +4,14 @@
     service_account_email: "ansible@cloudlearning-218407.iam.gserviceaccount.com"
     credentials_file: /root/cloud-learning.json
     project_id: "cloudlearning-218407"
-    instance_names: mj
+    instance_names: mj2
   tasks:
     - name: create instances
       gce:
         instance_names: "{{instance_names}}"
         zone: us-central1-a
         machine_type: n1-standard-1
-        image: centos-7
+        image: projects/centos-cloud/global/licenses/centos-7
         state: present
         service_account_email: "{{ service_account_email }}"
         credentials_file: "{{ credentials_file }}"
